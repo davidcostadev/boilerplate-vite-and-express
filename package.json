@@ -4,13 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon -w src -x tsx src/server.ts",
-    "deva": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\" \"npm run dev:json\"",
+    "dev:client": "vite --config vite.config.ts",
+    "dev:server": "tsx watch src/server/index.ts",
+    "lint": "eslint . --fix",
+    "format": "prettier . --write",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.server.json --noEmit"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.13",
     "axios": "^1.7.9",
     "clsx": "^2.1.1",
     "cors": "^2.8.5",
@@ -18,7 +20,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-toastify": "^11.0.2",
-    "vite-express": "^0.20.0"
+    "tailwindcss": "^4.1.13"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
